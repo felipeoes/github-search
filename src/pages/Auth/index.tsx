@@ -86,5 +86,6 @@ export default function Auth() {
       </SignView>
       {loading ? <Loading value={"BUSCANDO"} /> : <View></View>}
     </>
+    
   );
 }

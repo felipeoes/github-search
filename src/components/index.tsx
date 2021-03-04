@@ -46,7 +46,17 @@ export const InputText = styled.TextInput`
   letter-spacing: -0.24px;
 `;
 
-export const MainView = styled.TouchableOpacity`
+export const ScrollingView = styled.ScrollView`
+  flex: 1;
+  background: #292929;
+`;
+
+export const MainView = styled.View`
+  flex: 1;
+  background: #292929;
+`;
+
+export const ListView = styled.TouchableOpacity`
   justify-content: space-between;
   align-items: center;
   width: auto;
@@ -167,10 +177,6 @@ export const RepoInfo = styled.Text`
   letter-spacing: -0.24px;
 `;
 
-export const HomeView = styled.View`
-  flex: 1;
-  background: #292929;
-`;
 
 export const HomeHeader = styled.View`
   background: #1f1f1f;

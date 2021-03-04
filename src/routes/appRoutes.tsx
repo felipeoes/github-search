@@ -6,7 +6,6 @@ import Icon from 'react-native-vector-icons/Feather';
 import Followers from '../pages/Followers';
 import Following from '../pages/Following';
 import { StatusBar } from 'expo-status-bar';
-
 const Tab = createMaterialBottomTabNavigator();
 
 export default function AppRoutes() {
@@ -17,12 +16,16 @@ export default function AppRoutes() {
         backBehavior='history'
         shifting={false}
         labeled
+
+        sceneAnimationEnabled={false}
         activeColor='#000000'
         inactiveColor='#A5A5A5'
-        style={{ backgroundColor: '#292929' }}
+        style={{ width: '100%', backgroundColor: '#292929' }}
         barStyle={{
+          marginTop: 10,
           paddingTop: 10,
           height: 80,
+          width: '100%',
           backgroundColor: '#ffffff',
           borderTopColor: '#000',
           borderTopLeftRadius: 20,

@@ -7,7 +7,9 @@ import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../contexts/auth";
 import octokit from "../../services/api";
 import Loading from "../Loading";
-import { ButtonView, DescriptionText, HomeHeader, HomeView, ItemSeparator, MainImage, MainView, NameText, RectangleView, RepoInfo, RepoView, SaveView, TextUser, UserImage } from "../../components";
+import { ButtonView, DescriptionText, HomeHeader, ItemSeparator, MainImage, ListView, NameText, RectangleView, RepoInfo, RepoView, SaveView, TextUser, UserImage, MainView } from "../../components";
+import { state } from "../Auth";
+import { checkEmail } from "../../services/helpers";
 
 export default function Followers() {
   const { user, followers } = useAuth();
@@ -16,7 +18,6 @@ export default function Followers() {
   const [homeVisibility, setHomeVisibility] = useState('0%');
   const [followerUserData, setFollowerUserData] = useState<any>();
   const [loading, setLoading] = useState(false);
-  const [hasEmail, setHasEmail] = useState(true);
   const { signIn } = useAuth();
 
   function handleOnBack() {
@@ -26,6 +27,7 @@ export default function Followers() {
   function handleOnSave() {
     setLoading(true);
     handleOnPress();
+    state.username = followerUserData.login;
     signIn();
     setTimeout(() => {
       setLoading(false);
@@ -54,7 +56,7 @@ export default function Followers() {
 
   return (
     <>
-      <HomeView style={{ width: followersVisibility }}>
+      <MainView style={{ width: followersVisibility }}>
         <HomeHeader style={{ height: 98 }}>
           <TouchableOpacity onPress={handleOnBack}>
             <Icon name="arrow-left" color="#FFFFFF" size={26} />
@@ -73,7 +75,7 @@ export default function Followers() {
           renderItem={({ item }) => {
             return (
               <>
-                <MainView
+                <ListView
                 >
                   <View>
                     <RectangleView style={{ marginTop: 10, marginLeft: -20 }} />
@@ -98,21 +100,21 @@ export default function Followers() {
                       size={22}
                     />
                   </ButtonView>
-                </MainView>
+                </ListView>
 
               </>
             );
           }}
         />
 
-      </HomeView>
+      </MainView>
 
       {loading ? (
         <Loading value={"SALVANDO"}/>
       ) :
         (
           <View style={{ width: homeVisibility, height: homeVisibility }}>
-            <HomeView >
+            <MainView >
               <HomeHeader>
                 <TouchableOpacity onPress={handleOnPress}>
                   <Icon name="arrow-left" color="#FFFFFF" size={26} />
@@ -140,7 +142,7 @@ export default function Followers() {
               </RectangleView>
               <View style={{ marginTop: -35, marginLeft: 25 }}>
                 <NameText>{followerUserData?.name}</NameText>
-                <DescriptionText>{hasEmail ? followerUserData?.email : "Email privado"}</DescriptionText>
+                <DescriptionText>{checkEmail(followerUserData) ? followerUserData?.email : "Email privado"}</DescriptionText>
                 <DescriptionText>{followerUserData?.location}</DescriptionText>
               </View>
               <RepoView>
@@ -167,7 +169,7 @@ export default function Followers() {
                 <NameText>BIO</NameText>
                 <DescriptionText>{followerUserData?.bio}</DescriptionText>
               </View>
-            </HomeView>
+            </MainView>
           </View>
         )
       }

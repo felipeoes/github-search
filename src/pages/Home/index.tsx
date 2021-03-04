@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text , ScrollView} from "react-native";
 import { useAuth } from "../../contexts/auth";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import {  TouchableOpacity } from "react-native-gesture-handler";
 
-import { DescriptionText, HomeHeader, HomeView, LogOutView, NameText, OverlayView, RectangleView, RepoInfo, RepoView, TextUser, UserImage } from "../../components";
+import { DescriptionText, HomeHeader, LogOutView, MainView, NameText, OverlayView, RectangleView, RepoInfo, RepoView, ScrollingView, TextUser, UserImage } from "../../components";
 import Icon from "react-native-vector-icons/Feather";
+import { checkEmail } from "../../services/helpers";
 
 
 export default function Home() {
@@ -13,7 +14,6 @@ export default function Home() {
   const [followersData, setFollowersData] = useState<any[]>();
   const [followingData, setFollowingData] = useState<any[]>();
   const [hasData, setHasData] = useState(true);
-  const [hasEmail, setHasEmail] = useState(true);
   
   useEffect(function () {
     const fetchData = async () => {
@@ -22,12 +22,10 @@ export default function Home() {
         setReposData(reposData);
         setFollowingData(followingData);
         if (user?.name === undefined) setHasData(false);
-        if (user?.email === null || user?.email === undefined || user?.email === "null" || user?.email === "undefined") setHasEmail(false);
       } catch (error) {
         console.log("error while calling api");
         alert(error.message);
       }
-
     };
     fetchData();
     
@@ -42,7 +40,7 @@ export default function Home() {
         { hasData ?
           (
             <>
-              <HomeView>
+              <MainView>
                 <HomeHeader>
                   <TextUser>#{user?.login}</TextUser>
                   <TouchableOpacity style={{ width: '90%'}} onPress={handleSignOut}>
@@ -61,12 +59,14 @@ export default function Home() {
                     uri: user?.avatar_url,
                   }}
                 />
+                <ScrollingView>
                 <RectangleView>
                   <Text></Text>
                 </RectangleView>
+                
                 <View style={{ marginTop: -35, marginLeft: 25 }}>
                   <NameText>{user?.name}</NameText>
-                  <DescriptionText>{hasEmail ? user?.email : "Email privado"}</DescriptionText>
+                  <DescriptionText>{checkEmail(user) ? user?.email : "Email privado"}</DescriptionText>
                   <DescriptionText>{user?.location}</DescriptionText>
                 </View>
                 <RepoView>
@@ -93,12 +93,12 @@ export default function Home() {
                   <NameText>BIO</NameText>
                   <DescriptionText>{user?.bio}</DescriptionText>
                 </View>
-              </HomeView>
+                </ScrollingView>
+              </MainView>
             </>
           )
           :
           (
-
             <OverlayView>
               <HomeHeader>
                 <TextUser>#{user?.login}</TextUser>

@@ -1,7 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import AsyncStorage from '@react-native-community/async-storage';
-import { getData, getFollowers, getFollowing, getRepos, octokit } from "../services/api";
-import { token } from '../services/api';
+import React, { createContext, useContext, useState } from "react";
+import { getData, getFollowers, getFollowing, getRepos } from "../services/api";
 
 interface User {
     login: string;
@@ -27,7 +25,6 @@ interface AuthContextData {
     repos: any;
     followers: any;
     following: any;
-    loading: boolean;
     signIn(): Promise<void>;
     signOut(): void;
 }
@@ -49,31 +46,6 @@ const AuthProvider: React.FC = ({ children }) => {
     const [repos, setRepos] = useState();
     const [followers, setFollowers] = useState();
     const [following, setFollowing] = useState();
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-
-        async function loadStorageData() {
-
-            try {
-                // const storagedUser = await AsyncStorage.getItem('@RNAuth:user');
-                // const storagedToken = await AsyncStorage.getItem('@RNAuth:token');
-
-                // if (storagedUser && storagedToken) {
-                //     setUser(JSON.parse(storagedUser));
-
-                //     octokit.defaults.headers.Authorization = `Baerer ${storagedToken}`;
-                // }
-                setLoading(false);
-            }
-            catch (error) {
-                console.log("Error while trying to get asyncstorage");
-            }
-
-        }
-
-        loadStorageData();
-    });
 
     async function signIn() {
         const userInfo = await getData();
@@ -84,34 +56,17 @@ const AuthProvider: React.FC = ({ children }) => {
         setRepos(repoInfo);
         setFollowers(followersInfo);
         setFollowing(followingInfo);
-
-        octokit.defaults.headers.Authorization = `Baerer ${token}`;
-
-        try {
-            // await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(userInfo));
-            // await AsyncStorage.setItem('@RNAuth:token', String(token));
-            
-        }
-        catch (error) {
-            console.log("Error while trying to set asyncstorage");
-        }
-
     }
 
-    async function signOut() {
-        try {
-            await AsyncStorage.clear();
-            setUser(null);
-            setRepos(undefined);
-            setFollowers(undefined);
-            setFollowing(undefined);
-        } catch (error) {
-            console.log(error);
-        }
+    function signOut() {
+        setUser(null);
+        setRepos(undefined);
+        setFollowers(undefined);
+        setFollowing(undefined);
     }
 
     return (
-        <AuthContext.Provider value={{ signed: !!user, user, repos, followers, following, loading, signIn, signOut }}>
+        <AuthContext.Provider value={{ signed: !!user, user, repos, followers, following, signIn, signOut }}>
             {children}
         </AuthContext.Provider>
     );

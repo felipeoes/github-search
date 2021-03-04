@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../contexts/auth";
-import { DescriptionText, HomeHeader, HomeView, IconView, ItemSeparator, RectangleView, RepoName, RepoView, TextUser } from "../../components";
+import { DescriptionText, HomeHeader, IconView, ItemSeparator, MainView, RectangleView, RepoName, RepoView, TextUser } from "../../components";
 
 export default function Repos() {
   const { user, repos } = useAuth();
@@ -17,7 +17,7 @@ export default function Repos() {
   }
 
   return (
-    <HomeView>
+    <MainView>
       <HomeHeader style={{ height: 98 }}>
         <TouchableOpacity style={styles.button} onPress={handleOnPress}>
           <Icon name="arrow-left" color="#FFFFFF" size={26} />
@@ -74,7 +74,7 @@ export default function Repos() {
         }}
       />
 
-    </HomeView>
+    </MainView>
   );
 }
 

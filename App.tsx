@@ -13,19 +13,19 @@ export default function App() {
     'HelveticaNeueRegular': require('./src/assets/fonts/HelveticaNeueRegular.otf'),
   });
 
-  if(!fontsLoaded) {
+  if (!fontsLoaded) {
     return <AppLoading />;
   }
 
   return (
     <>
-    <NavigationContainer
-    >
-      <AuthProvider>
-        <Routes />
-      </AuthProvider>
-    <StatusBar style='light' />
-    </NavigationContainer>
+      <NavigationContainer
+      >
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
+        <StatusBar style='light' />
+      </NavigationContainer>
     </>
   );
 }

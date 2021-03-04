@@ -1,17 +1,19 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { View, FlatList , Text} from "react-native";
+import { View, FlatList, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../contexts/auth";
-import { ButtonView, DescriptionText, HomeHeader, HomeView, ItemSeparator, MainImage, MainView, NameText, RectangleView, RepoInfo, RepoView, SaveView, TextUser, UserImage } from "../../components";
+import { ButtonView, DescriptionText, HomeHeader, ItemSeparator, ListView, MainImage, MainView, NameText, RectangleView, RepoInfo, RepoView, SaveView, TextUser, UserImage } from "../../components";
 import Loading from "../Loading";
 import octokit from "../../services/api";
+import { state } from "../Auth";
+import { checkEmail } from "../../services/helpers";
 
 
 export default function Following({ route }) {
-  const { user, following, signIn, signOut } = useAuth();
+  const { user, following, signIn } = useAuth();
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -19,10 +21,6 @@ export default function Following({ route }) {
   const [followingVisibility, setFollowingVisibility] = useState('100%');
   const [followingUserData, setFollowingUserData] = useState<any>();
   const [hasEmail, setHasEmail] = useState(true);
-  
-  function toggleOverlay() {
-    setVisible(!visible);
-  };
 
   function handleOnBack() {
     navigation.navigate('Seguidores');
@@ -31,6 +29,7 @@ export default function Following({ route }) {
   function handleOnSave() {
     setLoading(true);
     handleOnPress();
+    state.username = followingUserData.login;
     signIn();
     setTimeout(() => {
       setLoading(false);
@@ -59,9 +58,9 @@ export default function Following({ route }) {
 
   return (
     <>
-      <HomeView style={{ width: followingVisibility }}>
+      <MainView style={{ width: followingVisibility }}>
         <HomeHeader style={{ height: 98 }}>
-          <TouchableOpacity  onPress={handleOnBack}>
+          <TouchableOpacity onPress={handleOnBack}>
             <Icon name="arrow-left" color="#FFFFFF" size={26} />
           </TouchableOpacity>
           <View style={{ flex: 1, alignItems: "center" }}>
@@ -78,7 +77,7 @@ export default function Following({ route }) {
           renderItem={({ item }) => {
             return (
               <>
-                <MainView
+                <ListView
                 >
                   <View>
                     <RectangleView style={{ marginTop: 10, marginLeft: -20 }} />
@@ -103,19 +102,19 @@ export default function Following({ route }) {
                       size={22}
                     />
                   </ButtonView>
-                </MainView>
+                </ListView>
               </>
             );
           }}
         />
-      </HomeView>
+      </MainView>
 
       {loading ? (
-        <Loading value={"SALVANDO"}/>
+        <Loading value={"SALVANDO"} />
       ) :
         (
           <View style={{ width: homeVisibility, height: homeVisibility }}>
-            <HomeView >
+            <MainView >
               <HomeHeader>
                 <TouchableOpacity onPress={handleOnPress}>
                   <Icon name="arrow-left" color="#FFFFFF" size={26} />
@@ -143,7 +142,7 @@ export default function Following({ route }) {
               </RectangleView>
               <View style={{ marginTop: -35, marginLeft: 25 }}>
                 <NameText>{followingUserData?.name}</NameText>
-                <DescriptionText>{hasEmail ? followingUserData?.email : "Email privado"}</DescriptionText>
+                <DescriptionText>{checkEmail(followingUserData) ? followingUserData?.email : "Email privado"}</DescriptionText>
                 <DescriptionText>{followingUserData?.location}</DescriptionText>
               </View>
               <RepoView>
@@ -170,7 +169,7 @@ export default function Following({ route }) {
                 <NameText>BIO</NameText>
                 <DescriptionText>{followingUserData?.bio}</DescriptionText>
               </View>
-            </HomeView>
+            </MainView>
           </View>
         )
       }

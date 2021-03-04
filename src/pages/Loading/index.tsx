@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text } from "react-native";
 import LottieView from 'lottie-react-native';
-import { HomeView } from '../../components';
+import { MainView } from '../../components';
 
 export default function Loading({ value}) {
     const [loading, setLoading] = useState(false);
@@ -14,7 +14,7 @@ export default function Loading({ value}) {
 
     return (
         <>     
-            <HomeView
+            <MainView
                 style={{ position: 'absolute', width: '100%', height: '100%', flex: 1, alignItems: "center", justifyContent: "center" }}
             >
                 <Text
@@ -32,7 +32,7 @@ export default function Loading({ value}) {
                     source={require('../../assets/animations/load.json')}
                     autoPlay
                 />
-            </HomeView>
+            </MainView>
         </>
     )
 }

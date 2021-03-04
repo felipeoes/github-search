@@ -1,9 +1,8 @@
-
 import { Octokit } from "@octokit/core";
 import { state } from "../pages/Auth";
-// import { GITHUB_TOKEN } from '@env';
+import   {GITHUB_TOKEN}   from '@env';
 
-export const token = process.env.GITHUB_TOKEN;
+export const token = GITHUB_TOKEN;
 
 export const octokit = new Octokit({
   auth: token,
@@ -12,7 +11,7 @@ export const octokit = new Octokit({
 export const getData = async () => {
   try {
     const data = await octokit.request(`GET /users/${state.username}`);
-
+    
     return data.data;
   } catch (error) {
     console.log("error while calling octokict");

@@ -1,11 +1,20 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { View, StyleSheet, FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../contexts/auth";
-import { DescriptionText, HomeHeader, IconView, ItemSeparator, MainView, RectangleView, RepoName, RepoView, TextUser } from "../../components";
+import {
+  DescriptionText,
+  HomeHeader,
+  IconView,
+  ItemSeparator,
+  MainView,
+  RectangleView,
+  RepoName,
+  TextUser,
+} from "../../components";
 
 export default function Repos() {
   const { user, repos } = useAuth();
@@ -19,13 +28,11 @@ export default function Repos() {
   return (
     <MainView>
       <HomeHeader style={{ height: 98 }}>
-        <TouchableOpacity style={styles.button} onPress={handleOnPress}>
+        <TouchableOpacity onPress={handleOnPress}>
           <Icon name="arrow-left" color="#FFFFFF" size={26} />
         </TouchableOpacity>
         <View style={{ flex: 1, alignItems: "center" }}>
-          <TextUser>
-            {user?.public_repos} repositórios
-          </TextUser>
+          <TextUser>{user?.public_repos} repositórios</TextUser>
         </View>
       </HomeHeader>
       <StatusBar style="light" />
@@ -36,12 +43,10 @@ export default function Repos() {
         renderItem={({ item }) => {
           return (
             <>
-              <View style={{ marginTop: 19, paddingLeft: 11, }}>
+              <View style={{ marginTop: 19, paddingLeft: 11 }}>
                 <RectangleView style={{ marginTop: 10, marginLeft: -20 }} />
-                <View style={{paddingLeft: 17}}>
-                  <RepoName>
-                    {item?.name}
-                  </RepoName>
+                <View style={{ paddingLeft: 17 }}>
+                  <RepoName>{item?.name}</RepoName>
                   <DescriptionText style={{ marginTop: 5 }}>
                     {item.description}
                   </DescriptionText>
@@ -73,13 +78,6 @@ export default function Repos() {
           );
         }}
       />
-
     </MainView>
   );
 }
-
-const styles = StyleSheet.create({
-  button: {
-    width: "90%",
-  },
-});

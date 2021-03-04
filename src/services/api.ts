@@ -1,6 +1,6 @@
 import { Octokit } from "@octokit/core";
 import { state } from "../pages/Auth";
-import   {GITHUB_TOKEN}   from '@env';
+import { GITHUB_TOKEN } from "@env";
 
 export const token = GITHUB_TOKEN;
 
@@ -9,49 +9,27 @@ export const octokit = new Octokit({
 });
 
 export const getData = async () => {
-  try {
-    const data = await octokit.request(`GET /users/${state.username}`);
-    
-    return data.data;
-  } catch (error) {
-    console.log("error while calling octokict");
-  }
+  const data = await octokit.request(`GET /users/${state.username}`);
 
+  return data.data;
 };
 
 export const getRepos = async () => {
-  try {
-    const data = await octokit.request(`GET /users/${state.username}/repos`);
+  const data = await octokit.request(`GET /users/${state.username}/repos`);
 
-    return data.data;
-  } catch (error) {
-    console.log("error while calling octokict");
-  }
-
+  return data.data;
 };
 
 export const getFollowers = async () => {
-  try {
-    const data = await octokit.request(`GET /users/${state.username}/followers`);
+  const data = await octokit.request(`GET /users/${state.username}/followers`);
 
-    return data.data;
-  } catch (error) {
-    console.log("error while calling octokict");
-  }
-
+  return data.data;
 };
 
 export const getFollowing = async () => {
-  try {
-    const data = await octokit.request(`GET /users/${state.username}/following`);
+  const data = await octokit.request(`GET /users/${state.username}/following`);
 
-    return data.data;
-  } catch (error) {
-    console.log("error while calling octokict");
-  }
-
+  return data.data;
 };
-
-
 
 export default octokit;

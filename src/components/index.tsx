@@ -4,7 +4,6 @@ export const LogoImage = styled.View`
   margin-bottom: 48px;
 `;
 
-
 export const TextTooltip = styled.Text`
   margin-bottom: 39px;
   margin-top: -57px;
@@ -167,7 +166,7 @@ export const RepoView = styled.View`
   padding-top: 15px;
   padding-left: 11px;
   padding-right: 11px;
-`
+`;
 
 export const RepoInfo = styled.Text`
   font-weight: bold;
@@ -176,7 +175,6 @@ export const RepoInfo = styled.Text`
   text-align: center;
   letter-spacing: -0.24px;
 `;
-
 
 export const HomeHeader = styled.View`
   background: #1f1f1f;
@@ -212,13 +210,16 @@ export const ItemSeparator = styled.View`
   background-color: #7070705a;
 `;
 
-export const OverlayView = styled.View`
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  zindex: 9999;
-  elevation: 9999;
-  backgroundcolor: #000;
+export const ErrorView = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ErrorText = styled.Text`
+  color: #d03434;
+  font-weight: bold;
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 100px;
 `;

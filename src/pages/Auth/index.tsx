@@ -3,7 +3,7 @@ import { useAuth } from "../../contexts/auth";
 import Icon from "react-native-vector-icons/EvilIcons";
 import Logo from "react-native-vector-icons/Feather";
 import Loading from "../Loading";
-import { Text } from "react-native";
+import { View } from "react-native";
 import {
   ButtonText,
   InputText,
@@ -12,6 +12,7 @@ import {
   SignView,
   TextTooltip,
 } from "../../components";
+import { useNavigation } from "@react-navigation/native";
 
 export let state = {
   username: "" as string,
@@ -22,6 +23,7 @@ export default function Auth() {
   const [tooltip, setTooltip] = useState("");
   const [userName, setUserName] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigation = useNavigation();
 
   const checkTextInput = () => {
     if (!userName.trim()) {
@@ -36,7 +38,19 @@ export default function Auth() {
 
   function handleSignIn() {
     setLoading(true);
-    signIn();
+    const result = signIn();
+    result
+      .then((result) => {
+        console.log(result);
+      })
+      .catch(() => {
+        console.log("nao deu pra logar");
+
+        setTimeout(() => {
+          navigation.navigate("ErrorHome");
+          setLoading(false);
+        }, 3000);
+      });
   }
 
   return (
@@ -70,7 +84,7 @@ export default function Auth() {
           />
         </LogInButton>
       </SignView>
-      {loading ? <Loading value={"BUSCANDO"} /> : <Text>'</Text>}
+      {loading ? <Loading value={"BUSCANDO"} /> : <View></View>}
     </>
   );
 }

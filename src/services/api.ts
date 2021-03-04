@@ -4,19 +4,19 @@ import   {GITHUB_TOKEN}   from '@env';
 
 export const token = GITHUB_TOKEN;
 
+
 export const octokit = new Octokit({
   auth: token,
 });
 
 export const getData = async () => {
+  
   try {
     const data = await octokit.request(`GET /users/${state.username}`);
-    
     return data.data;
   } catch (error) {
     console.log("error while calling octokict");
   }
-
 };
 
 export const getRepos = async () => {

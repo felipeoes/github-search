@@ -3,7 +3,7 @@ import { useAuth } from "../../contexts/auth";
 import Icon from "react-native-vector-icons/EvilIcons";
 import Logo from "react-native-vector-icons/Feather";
 import Loading from "../Loading";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import {
   ButtonText,
   InputText,
@@ -70,7 +70,8 @@ export default function Auth() {
           />
         </LogInButton>
       </SignView>
-      {loading ? <Loading value={"BUSCANDO"} /> : <Text>'</Text>}
+      {loading ? <Loading value={"BUSCANDO"} /> : <View></View>}
     </>
+    
   );
 }

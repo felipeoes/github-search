@@ -91,8 +91,8 @@ This project is under MIT license. Check out [LICENSE](LICENSE) for more details
 ---
 
 ## 👦 Author
-  <p><b>Felipe Oliveira</b></p>
- <img style="border-radius: 100%;" src="https://avatars.githubusercontent.com/u/62308968?v=4" width="150px;" alt="Felipe Oliveira "/>
+ <p><b>Felipe Oliveira</b></p>
+ <img style="border-radius: 100%;" src=".github/profile.png" width="160px;" alt="Felipe Oliveira "/>
  <br />
  
 

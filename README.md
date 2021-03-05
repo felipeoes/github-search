@@ -27,7 +27,7 @@
   <img alt="githubSearch" src=".github/github-app.png">
 </p>
 
-Download [<img src="https://cdn2.iconfinder.com/data/icons/miscellaneous-6-solid/128/demo_exhibition_demonstration-512.png" width="45"/>](http://maratona-discover.felipeoes.vercel.app)
+Download [<img src="https://cdn2.iconfinder.com/data/icons/miscellaneous-6-solid/128/demo_exhibition_demonstration-512.png" width="45"/>](https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40felipeoes/github-search-df48694c515f46d098d715bc29eb8c26-signed.apk)
 
 
 ## 💻 About

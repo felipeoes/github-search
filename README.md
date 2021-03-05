@@ -47,6 +47,7 @@ The application brings information about user's repos, followers and followings.
 This project was developed using the following technologies:
 
 - React Native
+- Typescript
 - Expo
 - Styled Components
 

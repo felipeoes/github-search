@@ -100,5 +100,5 @@ This project is under MIT license. Check out [LICENSE](LICENSE) for more details
 Made with :yellow_heart: by Felipe Oliveira
  
 [![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=for-the-badge&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/felipeoes)](https://www.linkedin.com/in/felipeoes)
-[![Whatsapp Badge](https://img.shields.io/badge/-Whatsapp-4CA143?style=for-the-badge&labelColor=4CA143&logo=whatsapp&logoColor=white&link=https://api.whatsapp.com/send?phone=5511987106320&text=Oi,Felipe)](https://api.whatsapp.com/send?phone=5511987106320&text=Oi,Felipe)
+[![Whatsapp Badge](https://img.shields.io/badge/-Whatsapp-4CA143?style=for-the-badge&labelColor=4CA143&logo=whatsapp&logoColor=white&link=https://api.whatsapp.com/send?phone=5511987106320&text=Oi,Felipe)](https://api.whatsapp.com/send?phone=5511952422536&text=Oi,Felipe)
 [![Gmail Badge](https://img.shields.io/badge/-Gmail-c14438?style=for-the-badge&logo=Gmail&logoColor=white&link=mailto:felipeoes@usp.br)](mailto:felipeoes@usp.br)
